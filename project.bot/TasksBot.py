@@ -12,6 +12,7 @@ bot = telebot.TeleBot(API_TOKEN)
 @bot.message_handler(commands=['start'])
 def handle_start(message):
     user_markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    user_markup.row('/start', '/stop')
     user_markup.row('Easy Task', 'Medium Task', 'Лютая жесть Task', 'Задачи GeekBrains')
     
     if str(message.from_user.id) == "734890426":
@@ -39,7 +40,7 @@ def handle_stop(message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     bot.send_message(message.from_user.id, "в процессе)", reply_markup=markup)
 
-    
+
 # создал кнопку 'Задачи GeekBrains' и функцию с добавлением выборки языка домашки
 @bot.message_handler(func=lambda message: message.text == 'Задачи GeekBrains')
 def send_geekbrains_tasks(message):
