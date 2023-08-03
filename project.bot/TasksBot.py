@@ -1,27 +1,47 @@
 import telebot
 from telebot import types
-# import config
-# import json
-# import os
-# import random
+
+
 API_TOKEN = '6481883927:AAEB7cwviE0sm65fSsboLyUXBDi6krKAYe4'
 bot = telebot.TeleBot(API_TOKEN)
-
 # пишу лог юзеров
 def log(message):
-    # print("Нажал кнопку")
+    
     from datetime import datetime
     print(datetime.now())
     print("Сообщение от {0} {1} (id = {2}) \n {3}".format(message.from_user.first_name,
                                                           message.from_user.last_name,
                                                           str(message.from_user.id), message.text))
-                                                              
+import pyodbc
+
+def connect_to_database():
+    try:
+        #прикручиваю путь к бд для коннекта
+        connection_string = r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\Тёмич\Desktop\Database21.accdb;'
+        connection = pyodbc.connect(connection_string)
+        return connection
+    except Exception as e:
+        print(f"Error connecting to the database: {e}")
+        return None
+
+# Подключение к базе данных
+connection = connect_to_database()
+if connection:
+    print("Connected to the database successfully!")
+else:
+    print("Failed to connect to the database.")
+
+
+
+
+
+                                                       
 
 @bot.message_handler(commands=['start'])
 def handle_start(message):
     user_markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     user_markup.row('/start', '/stop')
-    user_markup.row('Easy Task', 'Medium Task', 'Лютая жесть Task', 'Задачи GeekBrains')
+    user_markup.row('Easy Task', 'Medium Task', 'Hard Task', 'Задачи GeekBrains')
     
     if str(message.from_user.id) == "734890426":
         bot.send_message(message.chat.id, 'здароу'.format(message.from_user), reply_markup=user_markup)
@@ -37,6 +57,7 @@ def handle_stop(message):
 def handle_stop(message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     bot.send_message(message.from_user.id, "в процессе)", reply_markup=markup)
+  
 
 @bot.message_handler(func=lambda message: message.text == 'Medium Task')
 def handle_stop(message):
@@ -140,6 +161,39 @@ def Hw9(message):
     bot.send_message(message.chat.id,text="2)Задача 66: Задайте значения M и N. Напишите программу, которая найдёт сумму натуральных элементов в промежутке от M до N.")
     bot.send_message(message.chat.id,text="3)Напишите программу вычисления функции Аккермана с помощью рекурсии. Даны два неотрицательных числа m и n.")
     log(message)
+
+# keyboard = types.InlineKeyboardMarkup(row_width=9)  # Перенесен row_width сюда
+
+# keyboard.add(types.InlineKeyboardButton(text='Home Work 1', callback_data='Task_1'))
+# keyboard.add(types.InlineKeyboardButton(text='Home Work 2', callback_data='Task_2'))
+# keyboard.add(types.InlineKeyboardButton(text='Home Work 3', callback_data='Task_3'))
+# keyboard.add(types.InlineKeyboardButton(text='Home Work 4', callback_data='Task_4'))
+# keyboard.add(types.InlineKeyboardButton(text='Home Work 5', callback_data='Task_5'))
+# keyboard.add(types.InlineKeyboardButton(text='Home Work 6', callback_data='Task_6'))
+# keyboard.add(types.InlineKeyboardButton(text='Home Work 7', callback_data='Task_7'))
+# keyboard.add(types.InlineKeyboardButton(text='Home Work 8', callback_data='Task_8'))
+# keyboard.add(types.InlineKeyboardButton(text='Home Work 9', callback_data='Task_9'))
+
+# def read_task_from_excel(task_id):
+#     filename = 'tasks.xlsx'
+#     sheetname = 'Tasks'
+
+#     workbook = openpyxl.load_workbook(filename)
+#     sheet = workbook[sheetname]
+
+#     # Предполагаем, что номер задачи находится в первом столбце, а текст задачи во втором столбце
+#     for row in sheet.iter_rows(values_only=True):
+#         if row[0] == task_id:
+#             return row[1]  # Возвращаем текст задачи
+
+#     return 'Задача не найдена'
+# @bot.callback_query_handler(func=lambda call: True)
+# def callback_handler(call):
+#     task_id = call.data  # Получаем идентификатор задачи из callback_data кнопки
+#     task = read_task_from_excel(task_id)
+
+#     # Отправляем пользователю текст задачи
+#     bot.send_message(call.message.chat.id, text=task)
 
     # Кнопки к дз по питону
 @bot.message_handler(func=lambda message: message.text == 'Python')
