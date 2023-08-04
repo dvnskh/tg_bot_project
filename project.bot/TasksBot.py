@@ -2,6 +2,9 @@ import telebot
 from telebot import types
 from dictionary_sharp import tasks_c_sharp
 from python_dictionary import python_tasks
+from easy_task import easy
+from medium_task import medium
+from hard_task import hard
 import pyodbc
 
 
@@ -39,7 +42,10 @@ else:
 
 
                                                        
-
+keyboard_with_levels = types.ReplyKeyboardMarkup(resize_keyboard=True)
+keyboard_with_levels.add(types.KeyboardButton("Easy Task"))
+keyboard_with_levels.add(types.KeyboardButton("Medium Task"))
+keyboard_with_levels.add(types.KeyboardButton("Hard Task"))
 @bot.message_handler(commands=['start'])
 def handle_start(message):
     user_markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -57,20 +63,156 @@ def handle_stop(message):
     bot.send_message(message.from_user.id, "Все-го хоро-шего!", reply_markup=hide_markup)
     log(message)
 @bot.message_handler(func=lambda message: message.text == 'Easy Task')
+    
 def handle_stop(message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    bot.send_message(message.from_user.id, "в процессе)", reply_markup=markup)
-  
+    btn1 = types.KeyboardButton("Task1")
+    btn2 = types.KeyboardButton("Task2")
+    btn3 = types.KeyboardButton("Task3")
+    btn4 = types.KeyboardButton("Task4")
+    btn5 = types.KeyboardButton("Task5")
+    btn6 = types.KeyboardButton("Task6")
+    btn7 = types.KeyboardButton("Task7")
+    btn8 = types.KeyboardButton("Task8")
+    btn9 = types.KeyboardButton("Task9")
+    btn10 = types.KeyboardButton("Task10")
+    markup.add(btn1, btn2, btn3,btn4,btn5,btn6,btn7,btn8, btn9,btn10)
+
+    bot.send_message(message.chat.id, text="Выбирай номер задачи", reply_markup=markup)
+@bot.message_handler(func=lambda message: message.text == 'Task1')
+def Task1 (message):
+    bot.send_message(message.chat.id, text=easy[1])
+@bot.message_handler(func=lambda message: message.text == 'Task2')
+def Task2 (message):
+    bot.send_message(message.chat.id, text=easy[2])
+@bot.message_handler(func=lambda message: message.text == 'Task3')
+def Task3 (message):
+    bot.send_message(message.chat.id, text=easy[3])
+@bot.message_handler(func=lambda message: message.text == 'Task4')
+def Task4 (message):
+    bot.send_message(message.chat.id, text=easy[4])  
+@bot.message_handler(func=lambda message: message.text == 'Task5')
+def Task5 (message):
+    bot.send_message(message.chat.id, text=easy[5])  
+@bot.message_handler(func=lambda message: message.text == 'Task6')
+def Task6 (message):
+    bot.send_message(message.chat.id, text=easy[6])
+@bot.message_handler(func=lambda message: message.text == 'Task7')
+def Task7 (message):
+    bot.send_message(message.chat.id, text=easy[7])
+@bot.message_handler(func=lambda message: message.text == 'Task8')
+def Task8 (message):
+    bot.send_message(message.chat.id, text=easy[8])
+@bot.message_handler(func=lambda message: message.text == 'Task9')
+def Task9 (message):
+    bot.send_message(message.chat.id, text=easy[9])
+@bot.message_handler(func=lambda message: message.text == 'Task10')
+def Task10 (message):
+    bot.send_message(message.chat.id, text=easy[10])    
+@bot.message_handler(func=lambda message: message.text == 'Назад')
+def back_to_menu(message):
+    bot.send_message(message.chat.id, 'Выберите уровень сложности задач:', reply_markup=keyboard_with_levels)
+
+
+
+
+
 
 @bot.message_handler(func=lambda message: message.text == 'Medium Task')
 def handle_stop(message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    bot.send_message(message.from_user.id, "в процессе)", reply_markup=markup)
+    btn1 = types.KeyboardButton("Task_1")
+    btn2 = types.KeyboardButton("Task_2")
+    btn3 = types.KeyboardButton("Task_3")
+    btn4 = types.KeyboardButton("Task_4")
+    btn5 = types.KeyboardButton("Task_5")
+    btn6 = types.KeyboardButton("Task_6")
+    btn7 = types.KeyboardButton("Task_7")
+    btn8 = types.KeyboardButton("Task_8")
+    btn9 = types.KeyboardButton("Task_9")
+    btn10 = types.KeyboardButton("Task_10")
+    markup.add(btn1, btn2, btn3,btn4,btn5,btn6,btn7,btn8, btn9,btn10)
+    bot.send_message(message.chat.id, text="Выбирай номер задачи", reply_markup=markup)
+@bot.message_handler(func=lambda message: message.text == 'Task_1')
+def Task_1 (message):
+    bot.send_message(message.chat.id, text=medium[1])
+@bot.message_handler(func=lambda message: message.text == 'Task_2')
+def Task_2 (message):
+    bot.send_message(message.chat.id, text=medium[2])
+@bot.message_handler(func=lambda message: message.text == 'Task_3')
+def Task_3 (message):
+    bot.send_message(message.chat.id, text=medium[3]) 
+@bot.message_handler(func=lambda message: message.text == 'Task_4')
+def Task_4 (message):
+    bot.send_message(message.chat.id, text=medium[4]) 
+@bot.message_handler(func=lambda message: message.text == 'Task_5')
+def Task_5 (message):
+    bot.send_message(message.chat.id, text=medium[5])
+@bot.message_handler(func=lambda message: message.text == 'Task_6')
+def Task_6 (message):
+    bot.send_message(message.chat.id, text=medium[6]) 
+@bot.message_handler(func=lambda message: message.text == 'Task_7')
+def Task_7 (message):
+    bot.send_message(message.chat.id, text=medium[7]) 
+@bot.message_handler(func=lambda message: message.text == 'Task_8')
+def Task_8 (message):
+    bot.send_message(message.chat.id, text=medium[8]) 
+@bot.message_handler(func=lambda message: message.text == 'Task_9')
+def Task_9 (message):
+    bot.send_message(message.chat.id, text=medium[9])
+@bot.message_handler(func=lambda message: message.text == 'Task_10')
+def Task_10 (message):
+    bot.send_message(message.chat.id, text=medium[10])  
 
-@bot.message_handler(func=lambda message: message.text == 'Лютая жесть Task')
+
+
+
+@bot.message_handler(func=lambda message: message.text == 'Hard Task')
 def handle_stop(message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    bot.send_message(message.from_user.id, "в процессе)", reply_markup=markup)
+    btn1 = types.KeyboardButton("1task")
+    btn2 = types.KeyboardButton("2task")
+    btn3 = types.KeyboardButton("3task")
+    btn4 = types.KeyboardButton("4task")
+    btn5 = types.KeyboardButton("5task")
+    btn6 = types.KeyboardButton("6task")
+    btn7 = types.KeyboardButton("7task")
+    btn8 = types.KeyboardButton("8task")
+    btn9 = types.KeyboardButton("9task")
+    btn10 = types.KeyboardButton("10task")
+    markup.add(btn1, btn2, btn3,btn4,btn5,btn6,btn7,btn8, btn9,btn10)
+    bot.send_message(message.chat.id, text="Выбирай номер таски", reply_markup=markup)
+@bot.message_handler(func=lambda message: message.text == '1task')
+def task1(message):
+    bot.send_message(message.chat.id, text=hard[1])
+@bot.message_handler(func=lambda message: message.text == '2task')
+def task2 (message):
+    bot.send_message(message.chat.id, text=hard[2]) 
+@bot.message_handler(func=lambda message: message.text == '3task')    
+def task3 (message):
+    bot.send_message(message.chat.id, text=hard[3]) 
+@bot.message_handler(func=lambda message: message.text == '4task')
+def task4 (message):
+    bot.send_message(message.chat.id, text=hard[4])
+@bot.message_handler(func=lambda message: message.text == '5task')  
+def task5 (message):
+    bot.send_message(message.chat.id, text=hard[5]) 
+@bot.message_handler(func=lambda message: message.text == '6task')
+def task6 (message):
+    bot.send_message(message.chat.id, text=hard[6]) 
+@bot.message_handler(func=lambda message: message.text == '7task')
+def task7 (message):
+    bot.send_message(message.chat.id, text=hard[7]) 
+@bot.message_handler(func=lambda message: message.text == '8task')
+def task8 (message):
+    bot.send_message(message.chat.id, text=hard[8]) 
+@bot.message_handler(func=lambda message: message.text == '9task')
+def task9 (message):
+    bot.send_message(message.chat.id, text=hard[9]) 
+@bot.message_handler(func=lambda message: message.text == '10task')
+def task10 (message):
+    bot.send_message(message.chat.id, text=hard[10]) 
+
 
 
 # создал кнопку 'Задачи GeekBrains' и функцию с добавлением выборки языка домашки
